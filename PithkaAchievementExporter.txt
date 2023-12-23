@@ -3,6 +3,7 @@
 ## APIVersion: 101037 101038
 ## Author: @worhello
 ## DependsOn: PithkaAchievementTracker LibCopyWindow
-## Version: 1.2.3
+## Version: 2.0.0
 
+AchievementsDatabase.lua
 PithkaAchievementExporter.lua

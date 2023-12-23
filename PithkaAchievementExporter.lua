@@ -1,6 +1,7 @@
 PithkaAchievementExporter = PithkaAchievementExporter or {}
 PithkaAchievementExporter.name = "PithkaAchievementExporter"
-PithkaAchievementExporter.version = "1.2.3"
+PithkaAchievementExporter.version = "2.0.0"
+PithkaAchievementExporter.Achievements = PithkaAchievementExporter.Achievements or {}
 
 -- Main function ----------------------
 function PithkaAchievementExporter.getValForAchieve(a) 
@@ -48,6 +49,29 @@ function PithkaAchievementExporter.getDungeonData(rows)
     return t
 end
 
+function PithkaAchievementExporter.parseAllRows(data)
+    local t = { }
+    for _, row in pairs(data) do
+        for _1, achieveCode in pairs(row.CODES) do
+            if (achieveCode == "NIL") then
+                t[#t+1] = "0"
+            else
+                t[#t+1] = PithkaAchievementExporter.getValForAchieve(achieveCode)
+            end
+        end
+    end
+    return t
+end
+
+PithkaAchievementExporter.GetSummaryCodeForAchievements2 = function(query)
+    local data = PithkaAchievementExporter.Achievements.DBFilter(query)
+    local results = PithkaAchievementExporter.parseAllRows(data)
+
+    local fullCodeInBinaryString = table.concat(results, "")
+    -- LibCopyWindow:Show(GetDisplayName() ..":" .. fullCodeInBinaryString)
+    LibCopyWindow:Show(GetDisplayName() ..":" .. base64Encode(results))
+end
+
 PithkaAchievementExporter.GetSummaryCodeForAchievements = function(query, dataType) 
     local rows = PITHKA.Data.Achievements.DBFilter(query) 
     local results = { }
@@ -62,6 +86,7 @@ PithkaAchievementExporter.GetSummaryCodeForAchievements = function(query, dataTy
     end
 
     local fullCodeInBinaryString = table.concat(results, "")
+    -- LibCopyWindow:Show(GetDisplayName() ..":" .. fullCodeInBinaryString)
     LibCopyWindow:Show(GetDisplayName() ..":" .. base64Encode(results))
 end
 
@@ -97,9 +122,14 @@ end
 
 -- Initialize -------------------------
 function PithkaAchievementExporter.Initialize()
-    SLASH_COMMANDS["/pae_dungeon"] = function(keyword, argument) PithkaAchievementExporter.GetSummaryCodeForAchievements({TYPE='dungeon'}, 'dungeon') end
-    SLASH_COMMANDS["/pae_basedungeon"] = function(keyWord, argument) PithkaAchievementExporter.GetSummaryCodeForAchievements({TYPE='baseDungeon'}, 'baseDungeon') end  
-    SLASH_COMMANDS["/pae_trial"] = function(keyWord, argument) PithkaAchievementExporter.GetSummaryCodeForAchievements({TYPE='trial'}, 'trial') end  
+    -- TODO remove all usages of PITHKA functions
+    -- SLASH_COMMANDS["/pae_dungeon"] = function(keyword, argument) PithkaAchievementExporter.GetSummaryCodeForAchievements({TYPE='dungeon'}, 'dungeon') end
+    -- SLASH_COMMANDS["/pae_basedungeon"] = function(keyWord, argument) PithkaAchievementExporter.GetSummaryCodeForAchievements({TYPE='baseDungeon'}, 'baseDungeon') end  
+    -- SLASH_COMMANDS["/pae_trial"] = function(keyWord, argument) PithkaAchievementExporter.GetSummaryCodeForAchievements({TYPE='trial'}, 'trial') end  
+
+    SLASH_COMMANDS["/pae_dungeon"] = function(keyword, argument) PithkaAchievementExporter.GetSummaryCodeForAchievements2({TYPE='dungeon'}) end
+    SLASH_COMMANDS["/pae_basedungeon"] = function(keyword, argument) PithkaAchievementExporter.GetSummaryCodeForAchievements2({TYPE='baseDungeon'}) end
+    SLASH_COMMANDS["/pae_trial"] = function(keyword, argument) PithkaAchievementExporter.GetSummaryCodeForAchievements2({TYPE='trial'}) end
 end
 
 

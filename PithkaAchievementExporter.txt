@@ -1,9 +1,0 @@
-## Title: PithkaAchievementExporter
-## Description: Adds slash commands to copy encoded versions of the Achievement data displayed by PithkaAchievementTracker
-## APIVersion: 101040
-## Author: @worhello
-## DependsOn: PithkaAchievementTracker LibCopyWindow
-## Version: 2.0.0
-
-AchievementsDatabase.lua
-PithkaAchievementExporter.lua

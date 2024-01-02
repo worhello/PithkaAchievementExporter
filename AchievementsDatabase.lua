@@ -1,8 +1,12 @@
--- This is heavily based on Pithka's PITHKA.Data.Achievements.DB in Achievements.lua
-PithkaAchievementExporter = PithkaAchievementExporter or {}
-PithkaAchievementExporter.Achievements = PithkaAchievementExporter.Achievements or {}
+WorhelloAchievementExporter = WorhelloAchievementExporter or {}
+WorhelloAchievementExporter.Achievements = WorhelloAchievementExporter.Achievements or {}
 
-PithkaAchievementExporter.Achievements.DB = {
+-- This should be incremented as new achievement codes are added below 
+WorhelloAchievementExporter.Achievements.Version = 1
+
+-- The initial implementation here was heavily based on Pithka's PITHKA.Data.Achievements.DB in Achievements.lua
+-- Now this will diverge as additional extra achievements will be added
+WorhelloAchievementExporter.Achievements.DB = {
     -- Trials
     --                  VET   PHM1   PHM2   HM    TRI    EXT
     {ABBV="HRC", CODES={1474, "NIL", "NIL", 1136, "NIL", "NIL"}, TYPE="trial"},
@@ -84,9 +88,9 @@ PithkaAchievementExporter.Achievements.DB = {
     {ABBV="VOL",  CODES={1629, 1634, 1632, 1633},  TYPE='baseDungeon'}
 }
 
-PithkaAchievementExporter.Achievements.DBFilter = function(query)
+WorhelloAchievementExporter.Achievements.DBFilter = function(query)
     local output = {}    
-    for _, row in ipairs(PithkaAchievementExporter.Achievements.DB) do 
+    for _, row in ipairs(WorhelloAchievementExporter.Achievements.DB) do 
         local test = true
         for key, value in pairs(query) do
             test = test and row[key] == value

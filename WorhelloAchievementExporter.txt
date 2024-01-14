@@ -3,7 +3,7 @@
 ## APIVersion: 101040
 ## Author: @worhello
 ## DependsOn: LibCopyWindow
-## Version: 2.2.0
+## Version: 2.3.0
 
 AchievementsDatabase.lua
 WorhelloAchievementExporter.lua

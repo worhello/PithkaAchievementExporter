@@ -6,7 +6,7 @@ WorhelloAchievementExporter.Achievements = WorhelloAchievementExporter.Achieveme
 --   2 - Add all extra achievements for DLC dungeons
 --   3 - Add all extra achievements for trials and non-DLC dungeons
 --   4 - Add achievements for Scions of Ithilia (U41)
-WorhelloAchievementExporter.Achievements.Version = 3
+WorhelloAchievementExporter.Achievements.Version = 4
 
 -- The initial implementation here was heavily based on Pithka's PITHKA.Data.Achievements.DB in Achievements.lua
 -- Now this will diverge as additional extra achievements will be added

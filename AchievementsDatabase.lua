@@ -6,25 +6,27 @@ WorhelloAchievementExporter.Achievements = WorhelloAchievementExporter.Achieveme
 --   2 - Add all extra achievements for DLC dungeons
 --   3 - Add all extra achievements for trials and non-DLC dungeons
 --   4 - Add achievements for Scions of Ithilia (U41)
-WorhelloAchievementExporter.Achievements.Version = 4
+--   5 - Add achievements for Lucent Citadel (U42)
+WorhelloAchievementExporter.Achievements.Version = 5
 
 -- The initial implementation here was heavily based on Pithka's PITHKA.Data.Achievements.DB in Achievements.lua
 -- Now this will diverge as additional extra achievements will be added
 WorhelloAchievementExporter.Achievements.DB = {
     -- Trials
     --                  VET   PHM1   PHM2   HM    TRI    EXT
-    {ABBV="HRC", CODES={1474, "NIL", "NIL", 1136, "NIL", 1080,870                                                     }, TYPE="trial"},
-    {ABBV="AA",  CODES={1503, "NIL", "NIL", 1137, "NIL", 1081                                                         }, TYPE="trial"},
-    {ABBV="SO",  CODES={1462, "NIL", "NIL", 1138, "NIL", 1113,1124                                                    }, TYPE="trial"},
-    {ABBV="MOL", CODES={1368, "NIL", "NIL", 1344, "NIL", 1391 , 1386,1367,1392,1369,1385,1388,1389,1390               },  TYPE="trial"},
-    {ABBV="HOF", CODES={1810, "NIL", "NIL", 1829, 1838,  1836 , 1840,1833,1839,1832,1831,1830,1841,1837,1834,1809,1811},  TYPE="trial"},
-    {ABBV="AS",  CODES={2077, 2085,  2086,  2079, 2087,  2075 , 2078,2081,2080,2083,2084,2082                         },  TYPE="trial"},
-    {ABBV="CR",  CODES={2133, 2134,  2135,  2136, 2139,  2140 , 2132,2138,2137,2238,2237,2231,2232,2233,2234,2235,2236},  TYPE="trial"},
-    {ABBV="SS",  CODES={2435, 2469,  2470,  2466, 2467,  2468 , 2499,2434,2436,2437,2438,2500,2501                    },  TYPE="trial"},
-    {ABBV="KA",  CODES={2734, 2736,  2737,  2739, 2740,  2746 , 2743,2745,2742,2733,2816,2735,2744,2818,2817,2741     },  TYPE="trial"},
-    {ABBV="RG",  CODES={2987, 3005,  3006,  3007, 3003,  3004 , 2989,2990,2986,2988,3008,3009,3010,3011,3012          },  TYPE="trial"},
-    {ABBV="DSR", CODES={3244, 3250,  3251,  3252, 3248,  3249 , 3243,3245,3246,3247,3253,3254,3255,3256,3257          },  TYPE="trial"},
-    {ABBV="SE",  CODES={3560, 3566,  3567,  3568, 3564,  3565 , 3559,3561,3562,3563,3569,3570,3571,3572,3573,3670     },  TYPE="trial"},
+    {ABBV="HRC", CODES={1474, "NIL", "NIL", 1136, "NIL", 1080,870                                                                     }, TYPE="trial"},
+    {ABBV="AA",  CODES={1503, "NIL", "NIL", 1137, "NIL", 1081                                                                         }, TYPE="trial"},
+    {ABBV="SO",  CODES={1462, "NIL", "NIL", 1138, "NIL", 1113,1124                                                                    }, TYPE="trial"},
+    {ABBV="MOL", CODES={1368, "NIL", "NIL", 1344, "NIL", 1391 , 1386,1367,1392,1369,1385,1388,1389,1390                               }, TYPE="trial"},
+    {ABBV="HOF", CODES={1810, "NIL", "NIL", 1829, 1838,  1836 , 1840,1833,1839,1832,1831,1830,1841,1837,1834,1809,1811                }, TYPE="trial"},
+    {ABBV="AS",  CODES={2077, 2085,  2086,  2079, 2087,  2075 , 2078,2081,2080,2083,2084,2082                                         }, TYPE="trial"},
+    {ABBV="CR",  CODES={2133, 2134,  2135,  2136, 2139,  2140 , 2132,2138,2137,2238,2237,2231,2232,2233,2234,2235,2236                }, TYPE="trial"},
+    {ABBV="SS",  CODES={2435, 2469,  2470,  2466, 2467,  2468 , 2499,2434,2436,2437,2438,2500,2501                                    }, TYPE="trial"},
+    {ABBV="KA",  CODES={2734, 2736,  2737,  2739, 2740,  2746 , 2743,2745,2742,2733,2816,2735,2744,2818,2817,2741                     }, TYPE="trial"},
+    {ABBV="RG",  CODES={2987, 3005,  3006,  3007, 3003,  3004 , 2989,2990,2986,2988,3008,3009,3010,3011,3012                          }, TYPE="trial"},
+    {ABBV="DSR", CODES={3244, 3250,  3251,  3252, 3248,  3249 , 3243,3245,3246,3247,3253,3254,3255,3256,3257                          }, TYPE="trial"},
+    {ABBV="SE",  CODES={3560, 3566,  3567,  3568, 3564,  3565 , 3559,3561,3562,3563,3569,3570,3571,3572,3573,3670                     }, TYPE="trial"},
+    {ABBV="LC",  CODES={4015, 4021,  4022,  4023, 4019,  9846 , 4020,4013,4014,4016,4017,4018,4024,4025,4026,4027,4028,4061,4079,4151 }, TYPE="trial"},
 
     -- Arenas   
     {ABBV="DSA",  CODES={1140, "NIL", "NIL"}, TYPE="arena"},    

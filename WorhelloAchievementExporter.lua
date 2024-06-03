@@ -1,6 +1,6 @@
 WorhelloAchievementExporter = WorhelloAchievementExporter or {}
 WorhelloAchievementExporter.name = "WorhelloAchievementExporter"
-WorhelloAchievementExporter.version = "2.4.0"
+WorhelloAchievementExporter.version = "2.5.0"
 WorhelloAchievementExporter.Achievements = WorhelloAchievementExporter.Achievements or {}
 
 -- Main function ----------------------

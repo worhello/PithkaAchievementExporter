@@ -2,14 +2,20 @@ WorhelloAchievementExporter = WorhelloAchievementExporter or {}
 WorhelloAchievementExporter.Achievements = WorhelloAchievementExporter.Achievements or {}
 
 -- This should be incremented as new achievement codes are added below
+-- N.B Versions > 5 will only be incremented for the specific content type affected
 --   1 - Initial implementation
 --   2 - Add all extra achievements for DLC dungeons
 --   3 - Add all extra achievements for trials and non-DLC dungeons
 --   4 - Add achievements for Scions of Ithilia (U41)
 --   5 - Add achievements for Lucent Citadel (U42)
-WorhelloAchievementExporter.Achievements.Version = 5
 
--- The initial implementation here was heavily based on Pithka's PITHKA.Data.Achievements.DB in Achievements.lua
+WorhelloAchievementExporter.Achievements.Version = {}
+WorhelloAchievementExporter.Achievements.Version["trial"]       = 5
+WorhelloAchievementExporter.Achievements.Version["dungeon"]     = 5
+WorhelloAchievementExporter.Achievements.Version["baseDungeon"] = 5
+
+
+-- The initial implementation here was heavily based on Pithka's PITHKA.Data.Achievements.DB in PithkaAchievementTracker/Data/Achievements.lua
 -- Now this will diverge as additional extra achievements will be added
 WorhelloAchievementExporter.Achievements.DB = {
     -- Trials
@@ -29,10 +35,10 @@ WorhelloAchievementExporter.Achievements.DB = {
     {ABBV="LC",  CODES={4015, 4021,  4022,  4023, 4019,  9846 , 4020,4013,4014,4016,4017,4018,4024,4025,4026,4027,4028,4061,4079,4151 }, TYPE="trial"},
 
     -- Arenas   
-    {ABBV="DSA",  CODES={1140, "NIL", "NIL"}, TYPE="arena"},    
+    {ABBV="DSA",  CODES={1140, "NIL", "NIL"}, TYPE="arena"},
     {ABBV="BRP",  CODES={2363, 2368,  2372 }, TYPE="arena"},
     {ABBV="MSA",  CODES={1305, "NIL", "NIL"}, TYPE="arena"},
-    {ABBV="VSA",  CODES={2908, 2912,  2913 }, TYPE="arena"},    
+    {ABBV="VSA",  CODES={2908, 2912,  2913 }, TYPE="arena"},
 
     -- DLC Dungeons
     --                  Vet   HM    SR    ND    CHA    TRI    EXT...
@@ -109,4 +115,12 @@ WorhelloAchievementExporter.Achievements.DBFilter = function(query)
     end
 
     return output
+end
+
+WorhelloAchievementExporter.Achievements.GetVersion = function(query)
+    -- local type = query.TYPE
+    -- local val = WorhelloAchievementExporter.Achievements.Version[type]
+    -- d("read val: " .. val)
+
+    return WorhelloAchievementExporter.Achievements.Version[query.TYPE]
 end

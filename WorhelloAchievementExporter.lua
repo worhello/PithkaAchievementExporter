@@ -1,6 +1,6 @@
 WorhelloAchievementExporter = WorhelloAchievementExporter or {}
 WorhelloAchievementExporter.name = "WorhelloAchievementExporter"
-WorhelloAchievementExporter.version = "2.5.0"
+WorhelloAchievementExporter.version = "2.6.0"
 WorhelloAchievementExporter.Achievements = WorhelloAchievementExporter.Achievements or {}
 
 -- Main function ----------------------
@@ -31,7 +31,7 @@ WorhelloAchievementExporter.GetSummaryCodeForAchievements = function(query)
 
     local fullCodeInBinaryString = table.concat(results, "")
     -- LibCopyWindow:Show(GetDisplayName() ..":" .. fullCodeInBinaryString)
-    LibCopyWindow:Show(GetDisplayName() .. ":" .. WorhelloAchievementExporter.Achievements.Version .. ":" .. base64Encode(results))
+    LibCopyWindow:Show(GetDisplayName() .. ":" .. WorhelloAchievementExporter.Achievements.GetVersion(query) .. ":" .. base64Encode(results))
 end
 
 function base64Encode(dataAsTable)

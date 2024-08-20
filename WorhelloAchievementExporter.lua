@@ -1,7 +1,9 @@
 WorhelloAchievementExporter = WorhelloAchievementExporter or {}
 WorhelloAchievementExporter.name = "WorhelloAchievementExporter"
-WorhelloAchievementExporter.version = "2.6.0"
+WorhelloAchievementExporter.version = "3.0.1"
 WorhelloAchievementExporter.Achievements = WorhelloAchievementExporter.Achievements or {}
+
+local _control
 
 -- Main function ----------------------
 function WorhelloAchievementExporter.getValForAchieve(a) 
@@ -25,13 +27,62 @@ function WorhelloAchievementExporter.parseAllRows(data)
     return t
 end
 
+function WorhelloAchievementExporter.getUrlType(query)
+    local t = query.TYPE
+    if (t == 'dungeon') then
+        return 'dlcDungeons'
+    elseif (t == 'baseDungeon') then
+        return 'baseDungeons'
+    elseif (t == 'trial') then
+        return 'trials'
+    else
+        return 'unknown'
+    end
+end
+
+function WorhelloAchievementExporter.encodeCodeForUrl(code)
+    local newCode = string.gsub(code, "@", "%%40")
+    newCode = string.gsub(newCode, ":", "%%3A")
+    newCode = string.gsub(newCode, "+", "%%2B")
+
+    return newCode
+end
+
+function WorhelloAchievementExporter.showUi(code, url)
+    _control = WorhelloAchievementExporterContainer
+
+    local outputBox = _control:GetNamedChild("OutputBox")
+
+    local closeButton = _control:GetNamedChild("CancelButton")
+    closeButton:SetHandler("OnClicked", function()
+        _control:SetHidden(true)
+        outputBox:SetText("")
+    end)
+
+    local urlButton = _control:GetNamedChild("OpenUrlButton")
+    urlButton:SetHandler("OnClicked", function()
+        RequestOpenUnsafeURL(url)
+    end)
+
+    outputBox:SetText(code)
+    _control:SetHidden(false)
+end
+
 WorhelloAchievementExporter.GetSummaryCodeForAchievements = function(query)
     local data = WorhelloAchievementExporter.Achievements.DBFilter(query)
     local results = WorhelloAchievementExporter.parseAllRows(data)
 
     local fullCodeInBinaryString = table.concat(results, "")
-    -- LibCopyWindow:Show(GetDisplayName() ..":" .. fullCodeInBinaryString)
-    LibCopyWindow:Show(GetDisplayName() .. ":" .. WorhelloAchievementExporter.Achievements.GetVersion(query) .. ":" .. base64Encode(results))
+    -- TODO add options to print this in new UI using settings flag -- LibCopyWindow:Show(GetDisplayName() ..":" .. fullCodeInBinaryString)
+
+    local code = GetDisplayName() .. ":" .. WorhelloAchievementExporter.Achievements.GetVersion(query) .. ":" .. base64Encode(results)
+    -- Same TODO as above -- LibCopyWindow:Show(code)
+
+    local urlEncodedCode = WorhelloAchievementExporter.encodeCodeForUrl(code)
+    local urlType = WorhelloAchievementExporter.getUrlType(query)
+    local url = "https://worhello.github.io/esoSharedAchievementsViewer/?type=" .. urlType .. "&mode=update&data=" .. urlEncodedCode
+
+    WorhelloAchievementExporter.showUi(code, url)
 end
 
 function base64Encode(dataAsTable)
